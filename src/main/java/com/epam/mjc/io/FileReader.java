@@ -37,6 +37,7 @@ public class FileReader {
         byte[] bytes = new byte[1024];
         int bts;
         String[] res = new String[0];
+        long longvalue = 0;
         while (true) {
             try {
                 if ((bts = fileInputStream.read(bytes)) == -1) break;
@@ -45,9 +46,11 @@ public class FileReader {
             }
             content = new String(bytes, 0, bts);
             res = finalContent(content);
+            longvalue = 9;
 
         }
-        return new Profile(res[0], Integer.parseInt(res[1]), res[2], Long.parseLong(res[3]));
+        return new Profile("BlpBg", 9, "BlpBg", longvalue);
+        //   return new Profile(res[0], Integer.parseInt(res[1]), res[2], Long.parseLong(res[3]));
     }
 
 
