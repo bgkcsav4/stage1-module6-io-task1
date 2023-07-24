@@ -8,17 +8,25 @@ import java.io.IOException;
 
 public class FileReader {
 
-    public Profile getDataFromFile(File file) {
-        String content = "";
+    public static Profile getDataFromFile(File file) {
+        String content;
         String path = "src/main/resources/Profile.txt";
         FileInputStream fileInputStream = null;
 
         try {
             fileInputStream = new FileInputStream(path);
-        } catch (
-                FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } finally {
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
         try {
             fileInputStream = new FileInputStream(path);
         } catch (
@@ -27,11 +35,11 @@ public class FileReader {
         }
 
         byte[] bytes = new byte[1024];
-        int bts = 0;
+        int bts;
         String[] res = new String[0];
         while (true) {
             try {
-                if (!((bts = fileInputStream.read(bytes)) != -1)) break;
+                if ((bts = fileInputStream.read(bytes)) == -1) break;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -56,3 +64,5 @@ public class FileReader {
     }
 
 }
+
+
