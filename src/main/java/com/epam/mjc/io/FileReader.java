@@ -8,9 +8,11 @@ import java.io.IOException;
 
 public class FileReader {
 
+    private FileReader() {
+        throw new IllegalStateException("Utility class");
+    }
     public static Profile getDataFromFile(File file) {
         String content;
-     //   String path = "src/main/resources/Profile.txt";
         FileInputStream fileInputStream = null;
 
         try {
@@ -37,7 +39,6 @@ public class FileReader {
         byte[] bytes = new byte[1024];
         int bts;
         String[] res = new String[0];
-        long longvalue = 0;
         while (true) {
             try {
                 if ((bts = fileInputStream.read(bytes)) == -1) break;
