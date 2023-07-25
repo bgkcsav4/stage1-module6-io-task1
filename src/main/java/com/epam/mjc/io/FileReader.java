@@ -10,11 +10,11 @@ public class FileReader {
 
     public static Profile getDataFromFile(File file) {
         String content;
-        String path = "src/main/resources/Profile.txt";
+     //   String path = "src/main/resources/Profile.txt";
         FileInputStream fileInputStream = null;
 
         try {
-            fileInputStream = new FileInputStream(path);
+            fileInputStream = new FileInputStream(file.getPath());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
@@ -28,7 +28,7 @@ public class FileReader {
         }
 
         try {
-            fileInputStream = new FileInputStream(path);
+            fileInputStream = new FileInputStream(file.getPath());
         } catch (
                 FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -46,11 +46,10 @@ public class FileReader {
             }
             content = new String(bytes, 0, bts);
             res = finalContent(content);
-            longvalue = 9;
+
 
         }
-        return new Profile("BlpBg", 9, "BlpBg", longvalue);
-        //   return new Profile(res[0], Integer.parseInt(res[1]), res[2], Long.parseLong(res[3]));
+          return new Profile(res[0], Integer.parseInt(res[1]), res[2], Long.parseLong(res[3]));
     }
 
 
