@@ -8,10 +8,7 @@ import java.io.IOException;
 
 public class FileReader {
 
-    private FileReader() {
-        throw new IllegalStateException("Utility class");
-    }
-    public static Profile getDataFromFile(File file) {
+    public static Profile getDataFromFile(File file) throws IOException {
         String content;
         FileInputStream fileInputStream = null;
 
@@ -31,9 +28,10 @@ public class FileReader {
 
         try {
             fileInputStream = new FileInputStream(file.getPath());
-        } catch (
-                FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
+            fileInputStream.close();
             throw new RuntimeException(e);
+
         }
 
         byte[] bytes = new byte[1024];
@@ -45,6 +43,7 @@ public class FileReader {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            fileInputStream.close();
             content = new String(bytes, 0, bts);
             res = finalContent(content);
 
